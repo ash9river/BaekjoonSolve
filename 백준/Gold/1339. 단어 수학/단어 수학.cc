@@ -48,17 +48,10 @@ int main(){
     while(!q.empty()){
         char key=q.top().second;
         int val=q.top().first;
-       /*  cout<<key<<" "<<val<<'\n'; */
+        result+=val*ptr;
         q.pop();
-        m[key]=ptr--;
+        ptr--;
         if(ptr<0) break;
-    }
-    for(int i=0;i<v.size();++i){
-        for(int j=0;j<v[i].second.size();++j){
-            int tmp=m[v[i].second[j]];
-            result+=tmp*time(v[i].second.size()-1-j);
-            /* cout<<result<<" "; */
-        }
     }
     cout<<result;
 }
