@@ -7,11 +7,6 @@ vector<int> v(4);
 vector<int> picker;
 vector<int> minTable;
 int n,minCost=987654321;
-bool pan(string a,string b){
-    if(a<b) return true;
-    return false;
-
-}
 void pick(int gae,int start){
     if(gae==0){
         vector<int> sum(5,0);
@@ -35,17 +30,7 @@ void pick(int gae,int start){
                 minTable=picker;
             }
             else if(minCost==rslt){
-                int tSize=minTable.size();
-                string a="",b="";
-                for(int i=0;i<tSize;++i){
-                    a+=(minTable[i]+'0');
-                }
-                for(int i=0;i<pSize;++i){
-                    b+=(picker[i]+'0');
-                }
-                if(!pan(a,b)){
-                    minTable=picker;
-                }
+                if(minTable>picker) minTable=picker;
             }
         }
         return;
