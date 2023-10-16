@@ -7,6 +7,11 @@ vector<int> v(4);
 vector<int> picker;
 vector<int> minTable;
 int n,minCost=987654321;
+bool pan(string a,string b){
+    if(a<b) return true;
+    return false;
+
+}
 void pick(int gae,int start){
     if(gae==0){
         vector<int> sum(5,0);
@@ -31,51 +36,14 @@ void pick(int gae,int start){
             }
             else if(minCost==rslt){
                 int tSize=minTable.size();
-                bool calc=true;
-                if(tSize==pSize){
-                    for(int i=0;i<tSize;++i){
-                        if(minTable[i]>picker[i]){
-                            calc=false;
-                            break;
-                        }
-                        else if(minTable[i]<picker[i]) break;
-                    }
+                string a="",b="";
+                for(int i=0;i<tSize;++i){
+                    a+=(minTable[i]+'0');
                 }
-                else if(tSize>pSize){
-                    bool thirdPhase=true;
-                    for(int i=0;i<pSize;++i){
-                        if(minTable[i]>picker[i]){
-                            calc=false;
-                            break;
-                        }
-                        else if(minTable[i]<picker[i]){
-                            thirdPhase=false;
-                            break;
-                        }
-                    }
-                    if(calc){
-                        if(thirdPhase){
-                            bool pan=true;
-                            for(int i=0;i<pSize;++i){
-                                if(minTable[i]!=picker[i]){
-                                    pan=false;
-                                    break;
-                                }
-                            }
-                            if(pan) calc=false;
-                        }
-                    }
+                for(int i=0;i<pSize;++i){
+                    b+=(picker[i]+'0');
                 }
-                else{
-                    for(int i=0;i<tSize;++i){
-                        if(minTable[i]>picker[i]){
-                            calc=false;
-                            break;
-                        }
-                        else if(minTable[i]<picker[i]) break;
-                    }
-                }
-                if(!calc){
+                if(!pan(a,b)){
                     minTable=picker;
                 }
             }
