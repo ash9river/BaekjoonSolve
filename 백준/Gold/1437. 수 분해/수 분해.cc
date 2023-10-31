@@ -6,13 +6,6 @@
 using namespace std;
 int dp[1000001];
 int n;
-long long maxBun(int val){
-	if(val<5) return val;
-	int& ret=dp[val];
-	if(ret!=-1) return ret;
-	if(val%2==0) return ret=(maxBun(val/2)%mod*maxBun(val/2)%mod)%mod;
-	return ret=(maxBun((val+1)/2)%mod*maxBun(val/2)%mod)%mod;
-}
 int gae(int a){
 	if(a==1) return 3;
 	else if(a==2) return 9;
