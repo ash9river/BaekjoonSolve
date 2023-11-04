@@ -1,40 +1,34 @@
 #include <string>
 #include <vector>
-
 using namespace std;
-int parent[201];
-int rankOfParent[201];
-int findParent(int vertex){
-    if(parent[vertex]!=vertex) parent[vertex]=findParent(parent[vertex]);
-    return parent[vertex];
-}
-void unionByRank(int a,int b){
-    int parentA=findParent(a);
-    int parentB=findParent(b);
-    if(parentA!=parentB){
-        if(rankOfParent[parentA]>rankOfParent[parentB]){
-            swap(parentA,parentB);
-        }
-        parent[parentA]=parentB;
-        if(rankOfParent[parentA]==rankOfParent[parentB]) ++rankOfParent[parentB];
+bool state=false;
+vector<vector<int>> graph;
+bool visited[200];
+void dfs(int src){
+    if(visited[src]) return;
+    state=true;
+    visited[src]=true;
+    for(int i=0;i<graph[src].size();++i){
+        int nxt=graph[src][i];
+        dfs(nxt);
     }
 }
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
-    for(int i=0;i<n;++i) {
-        parent[i]=i;
-    }
-    for(int i=0;i<n;++i){
-        for(int j=0;j<n;++j){
-            if(i!=j){
-                if(computers[i][j]==1){
-                    unionByRank(i,j);
-                }
+    int cSize=computers.size();
+    graph.resize(cSize);
+    for(int i=0;i<cSize;++i){
+        for(int j=0;j<cSize;++j){
+            if(computers[i][j]==1){
+                if(i==j) continue;
+                graph[i].push_back(j);
             }
         }
     }
-    for(int i=0;i<n;++i){
-        if(parent[i]==i) ++answer;
+    for(int i=0;i<cSize;++i){
+        state=false;
+        dfs(i);
+        if(state) ++answer;
     }
     return answer;
 }
