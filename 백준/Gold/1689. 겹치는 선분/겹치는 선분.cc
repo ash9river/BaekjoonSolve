@@ -8,15 +8,13 @@ int main(){
 	ios_base::sync_with_stdio(0);
 	int n;
 	cin>>n;
-	vector<pair<int,int>> table(n);
-	for(int i=0;i<n;++i){
-		cin>>table[i].first>>table[i].second;
-	}
+	int a,b;
 	priority_queue<int> input;
 	priority_queue<int> output;
 	for(int i=0;i<n;++i){
-		input.push(-table[i].first);
-		output.push(-table[i].second);
+		cin>>a>>b;
+		input.push(-a);
+		output.push(-b);
 	}
 	int gae=0;
 	int maxGae=0;
