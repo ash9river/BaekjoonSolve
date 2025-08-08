@@ -29,7 +29,7 @@ int main(){
   }
   priority_queue<pair<int,pair<pair<int,int>,vector<string>>>> q;
   q.push({0,{{7,0},v}});
-  visited[0][0][0]=true;
+  visited[0][7][0]=true;
   bool state=false;
   while(!q.empty()){
     int time=-q.top().first;
