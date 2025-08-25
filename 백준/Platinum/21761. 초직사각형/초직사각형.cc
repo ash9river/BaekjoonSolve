@@ -16,23 +16,27 @@ int main(){
         cin>>t>>u;
         v[t-'A'].push(u);
     }
-    vector<ull> s(4);
+    vector<ull> s;
     s.push_back(a);
     s.push_back(b);
     s.push_back(c);
     s.push_back(d);
     for(int i=0;i<k;++i){
-        double tmpRatio=-1;
-        int tmpIdx=0;
+        ull maxVal=1;
         vector<ull> tmpS(4);
         for(int j=0;j<4;++j){
             if(v[j].empty()) continue;
-            tmpRatio=max((double)v[j].top()/(double)s[j],tmpRatio);
-            tmpIdx=j;
+            ull tmpMaxVal=v[j].top()+s[j];
+            for(int k=0;k<4;++k){
+                if(k==j) continue;
+                tmpMaxVal*=s[k];
+            }
+            tmpS[j]=tmpMaxVal;
+            maxVal=max(maxVal,tmpS[j]);
         }
         for(int j=0;j<4;++j){
             if(v[j].empty()) continue;
-            if(tmpIdx==j){
+            if(maxVal==tmpS[j]){
                 cout<<(char)(j+'A')<<" "<<v[j].top()<<'\n';
                 s[j]+=v[j].top();
                 v[j].pop();
